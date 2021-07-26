@@ -1,4 +1,4 @@
-package heranca;
+package heranca.parte1;
 
 public class Program2 {
 	
@@ -18,7 +18,7 @@ public class Program2 {
 		
 		Account acc3 = new BusinessAccount(1003, "Fernanda", 1000.00, 500.0);
 		acc3.Sacar(200.0);
-		System.out.println(acc3); //793
+		System.out.println(acc3.getBalance()); //793
 		
 	}
 

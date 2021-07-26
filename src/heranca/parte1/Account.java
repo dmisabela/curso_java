@@ -1,4 +1,4 @@
-package heranca;
+package heranca.parte1;
 
 public class Account {
 	

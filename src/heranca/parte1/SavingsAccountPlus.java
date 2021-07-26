@@ -1,4 +1,4 @@
-package heranca;
+package heranca.parte1;
 
 //Classe apenas para testes
 

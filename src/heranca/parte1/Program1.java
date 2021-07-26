@@ -1,10 +1,10 @@
-package heranca;
+package heranca.parte1;
 
 //UPCASTING E DOWNCASTING
 
 public class Program1 {
 	
-	@SuppressWarnings("unused")
+	
 	public static void main(String[] args) {
 			
 		//account.Depositar(0); //classe B.A. tem todas as classes e métodos de Account		
