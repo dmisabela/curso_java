@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import tratamento_de_excecoes.model.exceptions.DomainException;
+
 public class Reservation {
 	
 	private Integer roomNumber;
@@ -14,10 +16,22 @@ public class Reservation {
 	//coloco como estático para que não seja instanciado um novo sdf a cada
 	//objeto da classe Reservation, pois precisaremos de apenas um 
 	
-	public Reservation(Integer roomNumber, Date checkIn, Date checkout) {		
+	public Reservation(Integer roomNumber, Date checkIn, Date checkout) throws DomainException {	
+		
+		Date now = new Date(); 		
+
 		this.roomNumber = roomNumber;
 		this.checkIn = checkIn;
 		this.checkOut = checkout;
+		
+		if (!checkOut.after(checkIn)) { 
+			throw new DomainException("Data de check-out deve ser posterior a data de check-in");				
+		}
+		
+		if (checkIn.before(now) || checkOut.before(now)) {					
+			throw new DomainException("As datas devem ser futuras.");			
+		}
+		
 	}
 
 	public Integer getRoomNumber() {
@@ -51,22 +65,26 @@ public class Reservation {
 		
 	}
 	
-	public String updateDates(Date checkIn, Date checkOut) {
+	public void updateDates(Date checkIn, Date checkOut) throws DomainException {
+										//agora este método pode lançar uma exceção
+										//mas o tratamento é feito no main 
 		
 		Date now = new Date(); 
+		
 		if (checkIn.before(now) || checkOut.before(now)) {
-			return "As datas devem ser futuras.";
+			
+			throw new DomainException("As datas devem ser futuras.");
+			
+			//throw new IllegalArgumentException("As datas devem ser futuras.");
+			//a exceção é usada quando os argumentos passados ao método são inválidos
 		}
 		
 		if (!checkOut.after(checkIn)) { 
-			return "Data de check-out deve ser posterior a data de check-in";				
+			throw new DomainException("Data de check-out deve ser posterior a data de check-in");				
 		}
 		
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		
-		return null; //critério para verificar no program se deu erro ou nao
-		
 	}
 	
 	@Override
