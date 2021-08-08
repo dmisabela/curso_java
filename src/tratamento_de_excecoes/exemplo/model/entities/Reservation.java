@@ -51,10 +51,21 @@ public class Reservation {
 		
 	}
 	
-	public void updateDates(Date checkIn, Date checkOut) {
+	public String updateDates(Date checkIn, Date checkOut) {
+		
+		Date now = new Date(); 
+		if (checkIn.before(now) || checkOut.before(now)) {
+			return "As datas devem ser futuras.";
+		}
+		
+		if (!checkOut.after(checkIn)) { 
+			return "Data de check-out deve ser posterior a data de check-in";				
+		}
 		
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
+		
+		return null; //critério para verificar no program se deu erro ou nao
 		
 	}
 	
